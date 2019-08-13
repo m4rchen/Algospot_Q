@@ -26,20 +26,22 @@ void precalc()
             {
                 for (int l = 0; l < 2; l++)
                 {
-                    tmp -= convert(i+k, j+l);
+                    tmp -= convert(i + k, j + l);
                     blocks.push_back(tmp);
-                    tmp += convert(i+k, j+l);
+                    tmp += convert(i + k, j + l);
                 }
             }
         }
     }
 
-    for (int i = 0; i < 5; i++){
-        for (int j = 0; j < 4; j++){
+    for (int i = 0; i < 5; i++)
+    {
+        for (int j = 0; j < 4; j++)
+        {
             int tmp = 0;
-            tmp = convert(i, j) + convert(i, j+1);
+            tmp = convert(i, j) + convert(i, j + 1);
             blocks.push_back(tmp);
-            tmp = convert(j, i) + convert(j+1, i);
+            tmp = convert(j, i) + convert(j + 1, i);
             blocks.push_back(tmp);
         }
     }
@@ -47,17 +49,21 @@ void precalc()
 
 char game(int board)
 {
-    char& ret = cache[board];
+    char &ret = cache[board];
 
-    if (ret != -1){
+    if (ret != -1)
+    {
         return ret;
     }
 
     ret = 0;
 
-    for (int i = 0; i < blocks.size(); i++){
-        if ((board & blocks[i]) == 0){
-            if (game(board + blocks[i]) == 0){
+    for (int i = 0; i < blocks.size(); i++)
+    {
+        if ((board & blocks[i]) == 0)
+        {
+            if (game(board + blocks[i]) == 0)
+            {
                 ret = 1;
                 break;
             }
@@ -72,8 +78,9 @@ int main()
     int C;
     cin >> C;
     precalc();
-    
-    for (int i = 0; i < (1 << 25); i++){
+
+    for (int i = 0; i < (1 << 25); i++)
+    {
         cache[i] = -1;
     }
 
@@ -96,9 +103,12 @@ int main()
 
         char ret = game(board);
 
-        if (ret == 1){
+        if (ret == 1)
+        {
             cout << "WINNING" << endl;
-        } else {
+        }
+        else
+        {
             cout << "LOSING" << endl;
         }
     }
